@@ -449,8 +449,8 @@ function selectRow(row) {
 function toggleThueLaiForm(cb) {
     const wrapTen  = document.getElementById('wrap_ten_thue_lai');
     const wrapTien = document.getElementById('wrap_tien_thue_lai');
-    wrapTen.style.display  = cb.checked ? '' : 'none';
-    wrapTien.style.display = cb.checked ? '' : 'none';
+    wrapTen.style.display  = cb.checked ? 'flex' : 'none';
+    wrapTien.style.display = cb.checked ? 'flex' : 'none';
     if (!cb.checked) {
         document.getElementById('ten_thue_lai').value  = '';
         document.getElementById('tien_thue_lai').value = '';
@@ -474,8 +474,8 @@ function loadRowToForm(row) {
     // Thuê lái
     const thueLai = d.thuê == '1';
     document.getElementById('thue_lai').checked = thueLai;
-    document.getElementById('wrap_ten_thue_lai').style.display  = thueLai ? '' : 'none';
-    document.getElementById('wrap_tien_thue_lai').style.display = thueLai ? '' : 'none';
+    document.getElementById('wrap_ten_thue_lai').style.display  = thueLai ? 'flex' : 'none';
+    document.getElementById('wrap_tien_thue_lai').style.display = thueLai ? 'flex' : 'none';
     document.getElementById('ten_thue_lai').value  = d.tenthuuelai || '';
     document.getElementById('tien_thue_lai').value = parseInt(d.tienthuuelai || 0).toLocaleString('vi-VN').replace(/,/g, '.');
     setSelectValue('ma_tuyen', d.tuyen);
@@ -564,28 +564,51 @@ function doSearch() {
         }
         row.style.display = show ? '' : 'none';
     });
+    updateSummary();
 }
 function resetSearch() {
     document.querySelectorAll('#tableBody tr').forEach(r => r.style.display = '');
     ['ck_ngay','ck_chu','ck_kh','ck_xe'].forEach(id => document.getElementById(id).checked = false);
+    updateSummary();
 }
 function formatNumStr(n) {
     return parseInt(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 }
-function formatNum(input) {
-    let v = input.value.replace(/\D/g, '');
-    input.value = v.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+function toggleThueLaiForm(cb) {
+    const wrapTen  = document.getElementById('wrap_ten_thue_lai');
+    const wrapTien = document.getElementById('wrap_tien_thue_lai');
+    wrapTen.style.display  = cb.checked ? 'block' : 'none';
+    wrapTien.style.display = cb.checked ? 'block' : 'none';
+    if (!cb.checked) {
+        document.getElementById('ten_thue_lai').value  = '';
+        document.getElementById('tien_thue_lai').value = '';
+    }
 }
+function updateSummary() {
+    let count = 0, cuoc = 0, luong = 0;
+    document.querySelectorAll('#tableBody tr').forEach(tr => {
+        if (tr.style.display === 'none') return;
+        count++;
+        const cells = tr.getElementsByTagName('td');
+        cuoc  += parseNum(cells[cells.length - 4]?.innerText || '0');
+        luong += parseNum(cells[cells.length - 3]?.innerText || '0');
+    });
+    document.getElementById('sum_count').innerText  = count;
+    document.getElementById('sum_cuoc').innerText   = fmtNum(cuoc);
+    document.getElementById('sum_luong').innerText  = fmtNum(luong);
+}
+function parseNum(s){ return parseInt(String(s).replace(/\./g,''))||0; }
+function fmtNum(n){ return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g,'.'); }
+
 document.addEventListener('keydown', function(e) {
     if (e.altKey) {
         if (e.key.toLowerCase() === 'a') { e.preventDefault(); submitAdd(); }
         if (e.key.toLowerCase() === 'e') { e.preventDefault(); submitEdit(); }
         if (e.key.toLowerCase() === 'd') { e.preventDefault(); deleteRow(); }
     }
-    if (e.key === 'Escape') { 
-        window.location.href = 'index.php'; 
-    }
+    if (e.key === 'Escape') { window.location.href = 'index.php'; }
 });
+window.addEventListener('load', updateSummary);
 </script>
 </body>
 </html>
