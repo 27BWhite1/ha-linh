@@ -24,30 +24,26 @@ $result = $conn->query("SELECT * FROM users ORDER BY id ASC");
     <title>Quản lý người dùng – Hà Linh</title>
     <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
+        *, *::before, *::after { 
+            box-sizing: border-box; 
+            margin: 0; padding: 0; 
+        }
         body {
             font-family: 'Be Vietnam Pro', sans-serif;
             background: #f1f3f8;
             color: #1a1f36;
             min-height: 100vh;
         }
-
-        /* ── Page wrapper ── */
         .page-wrapper {
             margin: 24px 28px;
             padding: 0 0 40px;
         }
-
-        /* ── Card ── */
         .card {
             background: #fff;
             border-radius: 16px;
             box-shadow: 0 4px 24px rgba(0,0,0,.07);
             overflow: hidden;
         }
-
-        /* ── Card header ── */
         .card-header {
             background: linear-gradient(135deg, #be0000 0%, #7b0000 100%);
             padding: 28px 32px 24px;
@@ -57,8 +53,10 @@ $result = $conn->query("SELECT * FROM users ORDER BY id ASC");
         .card-header::after {
             content: '';
             position: absolute;
-            right: -40px; top: -40px;
-            width: 180px; height: 180px;
+            right: -40px; 
+            top: -40px;
+            width: 180px; 
+            height: 180px;
             border-radius: 50%;
             background: rgba(255,255,255,.07);
         }
@@ -75,8 +73,6 @@ $result = $conn->query("SELECT * FROM users ORDER BY id ASC");
             margin-top: 4px;
             position: relative;
         }
-
-        /* ── Toolbar ── */
         .toolbar {
             display: flex;
             gap: 8px;
@@ -84,7 +80,6 @@ $result = $conn->query("SELECT * FROM users ORDER BY id ASC");
             border-bottom: 1px solid #f0f0f5;
             flex-wrap: wrap;
         }
-
         .btn {
             display: inline-flex;
             align-items: center;
@@ -103,43 +98,45 @@ $result = $conn->query("SELECT * FROM users ORDER BY id ASC");
             background: #be0000;
             color: #fff;
         }
-        .btn-primary:hover { background: #950000; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(190,0,0,.3); }
-
+        .btn-primary:hover { 
+            background: #950000; 
+            transform: translateY(-1px); 
+            box-shadow: 0 4px 12px rgba(190,0,0,.3); 
+        }
         .btn-secondary {
             background: #eef0f7;
             color: #3a4060;
         }
-        .btn-secondary:hover { background: #e0e3f0; transform: translateY(-1px); }
-
+        .btn-secondary:hover { 
+            background: #e0e3f0; 
+            transform: translateY(-1px); 
+        }
         .btn-danger {
             background: #fff0f0;
             color: #c62828;
         }
-        .btn-danger:hover { background: #ffe0e0; transform: translateY(-1px); }
-
+        .btn-danger:hover { 
+            background: #ffe0e0; 
+            transform: translateY(-1px); 
+        }
         .btn-ghost {
             background: transparent;
             color: #6b7280;
             border: 1px solid #e5e7eb;
         }
         .btn-ghost:hover { background: #f9fafb; }
-
-        /* ── Table ── */
         .table-wrap {
             padding: 0 0 8px;
             overflow-x: auto;
         }
-
         table {
             width: 100%;
             border-collapse: collapse;
         }
-
         thead tr {
             background: #f8f9fc;
             border-bottom: 2px solid #eef0f7;
         }
-
         th {
             padding: 12px 20px;
             text-align: left;
@@ -149,9 +146,14 @@ $result = $conn->query("SELECT * FROM users ORDER BY id ASC");
             letter-spacing: .8px;
             color: #8892a4;
         }
-        th:first-child { width: 56px; text-align: center; }
-        th:nth-child(2) { width: 56px; text-align: center; }
-
+        th:first-child { 
+            width: 56px; 
+            text-align: center; 
+        }
+        th:nth-child(2) { 
+            width: 56px; 
+            text-align: center; 
+        }
         tbody tr {
             border-bottom: 1px solid #f3f4f8;
             transition: background .12s;
@@ -160,16 +162,17 @@ $result = $conn->query("SELECT * FROM users ORDER BY id ASC");
         tbody tr:last-child { border-bottom: none; }
         tbody tr:hover { background: #fdf5f5; }
         tbody tr.selected { background: #fff5f5; }
-
         td {
             padding: 14px 20px;
             font-size: 13.5px;
             color: #374151;
         }
         td:first-child { text-align: center; }
-        td:nth-child(2) { text-align: center; color: #9ca3af; font-size: 12px; }
-
-        /* ── Avatar / username ── */
+        td:nth-child(2) { 
+            text-align: center; 
+            color: #9ca3af; 
+            font-size: 12px; 
+        }
         .user-cell {
             display: flex;
             align-items: center;
@@ -188,8 +191,6 @@ $result = $conn->query("SELECT * FROM users ORDER BY id ASC");
             flex-shrink: 0;
         }
         .username { font-weight: 600; color: #1a1f36; }
-
-        /* ── Role badge ── */
         .badge {
             display: inline-block;
             padding: 3px 10px;
@@ -197,19 +198,36 @@ $result = $conn->query("SELECT * FROM users ORDER BY id ASC");
             font-size: 11px;
             font-weight: 600;
         }
-        .badge-admin { background: #fef3c7; color: #92400e; }
-        .badge-ke-toan { background: #dbeafe; color: #1e40af; }
-        .badge-nhan-vien { background: #d1fae5; color: #065f46; }
-        .badge-default { background: #f3f4f6; color: #374151; }
-
-        /* ── Password mask ── */
-        .pw-mask { letter-spacing: 2px; color: #d1d5db; font-size: 16px; }
-
-        /* ── Empty state ── */
-        .empty { text-align: center; padding: 48px 20px; color: #9ca3af; }
-        .empty svg { opacity: .35; margin-bottom: 12px; }
-
-        /* ── Modal ── */
+        .badge-admin { 
+            background: #fef3c7; 
+            color: #92400e; 
+        }
+        .badge-ke-toan { 
+            background: #dbeafe; 
+            color: #1e40af; 
+        }
+        .badge-nhan-vien { 
+            background: #d1fae5; 
+            color: #065f46; 
+        }
+        .badge-default { 
+            background: #f3f4f6; 
+            color: #374151; 
+        }
+        .pw-mask { 
+            letter-spacing: 2px; 
+            color: #d1d5db; 
+            font-size: 16px; 
+        }
+        .empty { 
+            text-align: center; 
+            padding: 48px 20px; 
+            color: #9ca3af; 
+        }
+        .empty svg { 
+            opacity: .35; 
+            margin-bottom: 12px; 
+        }
         .modal {
             display: none;
             position: fixed;
@@ -221,7 +239,6 @@ $result = $conn->query("SELECT * FROM users ORDER BY id ASC");
             justify-content: center;
         }
         .modal.open { display: flex; }
-
         .modal-box {
             background: #fff;
             border-radius: 16px;
@@ -235,7 +252,6 @@ $result = $conn->query("SELECT * FROM users ORDER BY id ASC");
             from { transform: translateY(24px); opacity: 0; }
             to   { transform: translateY(0);    opacity: 1; }
         }
-
         .modal-head {
             background: linear-gradient(135deg, #be0000, #7b0000);
             padding: 16px 24px;
@@ -243,7 +259,11 @@ $result = $conn->query("SELECT * FROM users ORDER BY id ASC");
             align-items: center;
             justify-content: space-between;
         }
-        .modal-head h2 { color: #fff; font-size: 14px; font-weight: 700; }
+        .modal-head h2 { 
+            color: #fff; 
+            font-size: 14px; 
+            font-weight: 700; 
+        }
         .modal-close {
             background: rgba(255,255,255,.15);
             border: none;
@@ -252,14 +272,12 @@ $result = $conn->query("SELECT * FROM users ORDER BY id ASC");
             border-radius: 50%;
             cursor: pointer;
             font-size: 16px;
-            display: flex; align-items: center; justify-content: center;
+            display: flex; align-items: center; 
+            justify-content: center;
             transition: background .15s;
         }
         .modal-close:hover { background: rgba(255,255,255,.3); }
-
         iframe { display: block; }
-
-        /* ── Breadcrumb / back ── */
         .page-meta {
             display: flex;
             align-items: center;
@@ -268,7 +286,11 @@ $result = $conn->query("SELECT * FROM users ORDER BY id ASC");
             font-size: 12px;
             color: #9ca3af;
         }
-        .page-meta a { color: #be0000; text-decoration: none; font-weight: 500; }
+        .page-meta a { 
+            color: #be0000; 
+            text-decoration: none; 
+            font-weight: 500; 
+        }
         .page-meta a:hover { text-decoration: underline; }
     </style>
 </head>
@@ -367,7 +389,6 @@ $result = $conn->query("SELECT * FROM users ORDER BY id ASC");
     </div>
 </div>
 
-<!-- Modal -->
 <div id="userModal" class="modal">
     <div class="modal-box">
         <div class="modal-head">
@@ -409,7 +430,6 @@ function deleteUser() {
     if (confirm('Bạn có chắc muốn xóa tài khoản này?'))
         window.location.href = 'quan_li_nguoi_dung.php?delete_id=' + id;
 }
-// Đóng modal khi click ngoài
 document.getElementById('userModal').addEventListener('click', function(e) {
     if (e.target === this) closeModal();
 });

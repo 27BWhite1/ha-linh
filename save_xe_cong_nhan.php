@@ -29,7 +29,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
              gio_don, gio_ve, chu_xe, ten_thue_lai, cuoc_xe, luong_lai_xe,
              tien_thue_lai, ca_noi, thue_lai, ghi_chu)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-        // 10s + 3i + 2i + 1s = ssssssssssiiiiis (16 params)
         $stmt->bind_param("ssssssssssiiiiis",
             $ngay_chay, $loai_xe, $ma_tuyen, $bien_so, $lai_xe, $khach_hang,
             $gio_don, $gio_ve, $chu_xe, $ten_thue_lai,
@@ -41,7 +40,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             gio_don=?, gio_ve=?, chu_xe=?, ten_thue_lai=?,
             cuoc_xe=?, luong_lai_xe=?, tien_thue_lai=?, ca_noi=?, thue_lai=?, ghi_chu=?
             WHERE id=?");
-        // 10s + 3i + 2i + 1s + 1i(WHERE) = ssssssssssiiiiiisi (17 params)
         $stmt->bind_param("ssssssssssiiiiisi",
             $ngay_chay, $loai_xe, $ma_tuyen, $bien_so, $lai_xe, $khach_hang,
             $gio_don, $gio_ve, $chu_xe, $ten_thue_lai,

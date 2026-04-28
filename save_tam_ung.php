@@ -42,7 +42,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $chuc_vu, $ly_do, $so_tien, $nguoi_duyet, $trang_thai, $ngay_hoan_tra, $ghi_chu, $id
         );
     }
-
     if ($stmt->execute()) {
         if ($trang_thai == 'Đã khấu trừ' && $nguoi_tam_ung) {
             $ck = $conn->prepare("SELECT id, khau_tru, tong_luong, luong_trach_nhiem, tong_luong_chuyen_cn, tong_luong_chuyen_dl, phu_cap FROM luong_lai_xe WHERE thang=? AND nam=? AND ten_lai_xe=?");

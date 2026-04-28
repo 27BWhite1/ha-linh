@@ -42,21 +42,99 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta charset="UTF-8">
     <title>Quên mật khẩu - HA LINH TRANSPORT</title>
     <style>
-        :root { --ha-linh-red: #be0000; --ha-linh-dark: #8b0000; }
-        body { font-family: 'Segoe UI', sans-serif; background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&q=80&w=2069'); background-size: cover; background-position: center; height: 100vh; display: flex; justify-content: center; align-items: center; margin: 0; }
-        .auth-container { background: white; width: 480px; padding: 40px; border-radius: 15px; box-shadow: 0 15px 35px rgba(0,0,0,0.4); }
-        .logo-text { font-size: 22px; font-weight: 800; color: var(--ha-linh-red); margin-bottom: 25px; display: block; text-decoration: none; text-align: center; }
-        h2 { text-align: center; color: #333; margin-bottom: 30px; }
-        .form-group { display: flex; align-items: center; margin-bottom: 15px; }
-        .form-group label { width: 120px; text-align: left; font-weight: bold; color: #555; }
-        .form-group input { flex: 1; padding: 12px; border: 1px solid #ddd; border-radius: 8px; outline: none; }
+        :root { 
+            --ha-linh-red: #be0000; 
+            --ha-linh-dark: #8b0000; 
+        }
+        body { 
+            font-family: 'Segoe UI', sans-serif; 
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&q=80&w=2069'); 
+            background-size: cover; 
+            background-position: center; 
+            height: 100vh; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            margin: 0; 
+        }
+        .auth-container { 
+            background: white; 
+            width: 480px; 
+            padding: 40px; 
+            border-radius: 15px; 
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4); 
+        }
+        .logo-text { 
+            font-size: 22px; 
+            font-weight: 800; 
+            color: var(--ha-linh-red); 
+            margin-bottom: 25px; 
+            display: block; 
+            text-decoration: none; 
+            text-align: center; 
+        }
+        h2 { 
+            text-align: center; 
+            color: #333; 
+            margin-bottom: 30px; 
+        }
+        .form-group { 
+            display: flex; 
+            align-items: center; 
+            margin-bottom: 15px; 
+        }
+        .form-group label { 
+            width: 120px; 
+            text-align: left; 
+            font-weight: bold; 
+            color: #555; 
+        }
+        .form-group input { 
+            flex: 1; 
+            padding: 12px; 
+            border: 1px solid #ddd; 
+            border-radius: 8px; 
+            outline: none; 
+        }
         .form-group input:focus { border-color: var(--ha-linh-red); }
-        .btn-submit { width: 100%; padding: 13px; background: var(--ha-linh-red); color: white; border: none; border-radius: 8px; font-weight: bold; font-size: 16px; cursor: pointer; transition: 0.3s; margin-top: 10px; }
+        .btn-submit { 
+            width: 100%; 
+            padding: 13px; 
+            background: var(--ha-linh-red); 
+            color: white; 
+            border: none; 
+            border-radius: 8px; 
+            font-weight: bold; 
+            font-size: 16px; 
+            cursor: pointer; 
+            transition: 0.3s; 
+            margin-top: 10px; 
+        }
         .btn-submit:hover { background: var(--ha-linh-dark); }
-        .switch-link { text-align: center; margin-top: 25px; font-size: 14px; color: #666; }
-        .switch-link a { color: var(--ha-linh-red); text-decoration: none; font-weight: bold; }
-        .msg-error { color: red; font-size: 14px; margin-bottom: 15px; text-align: center; }
-        .msg-success { color: green; font-size: 14px; margin-bottom: 15px; font-weight: bold; text-align: center; }
+        .switch-link { 
+            text-align: center; 
+            margin-top: 25px; 
+            font-size: 14px; 
+            color: #666; 
+        }
+        .switch-link a { 
+            color: var(--ha-linh-red); 
+            text-decoration: none; 
+            font-weight: bold; 
+        }
+        .msg-error { 
+            color: red; 
+            font-size: 14px; 
+            margin-bottom: 15px; 
+            text-align: center; 
+        }
+        .msg-success { 
+            color: green; 
+            font-size: 14px; 
+            margin-bottom: 15px; 
+            font-weight: bold; 
+            text-align: center; 
+        }
     </style>
 </head>
 <body>

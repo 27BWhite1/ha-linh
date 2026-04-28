@@ -32,18 +32,74 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta charset="UTF-8">
     <title><?php echo ($action == 'add' ? 'Thêm mới' : 'Sửa'); ?> Loại xe</title>
     <style>
-        body { font-family: Arial, sans-serif; background-color: #f0f0f0; display: flex; justify-content: center; padding-top: 50px; }
-        .form-container { background: white; width: 400px; border: 1px solid #000080; box-shadow: 2px 2px 10px rgba(0,0,0,0.1); }
-        .form-header { background: #000080; color: white; padding: 10px; font-weight: bold; text-align: center; text-transform: uppercase; }
+        body { 
+            font-family: Arial, sans-serif; 
+            background-color: #f0f0f0; 
+            display: flex; 
+            justify-content: center; 
+            padding-top: 50px; 
+        }
+        .form-container { 
+            background: white; 
+            width: 400px; 
+            border: 1px solid #000080; 
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.1); 
+        }
+        .form-header { 
+            background: #000080; 
+            color: white; 
+            padding: 10px; 
+            font-weight: bold; 
+            text-align: center; 
+            text-transform: uppercase; 
+        }
         .form-body { padding: 20px; }
         .form-group { margin-bottom: 15px; }
-        .form-group label { display: block; font-size: 13px; font-weight: bold; margin-bottom: 5px; color: #333; }
-        .form-group input { width: 100%; padding: 6px; border: 1px solid #ccc; box-sizing: border-box; }
-        .form-footer { background: #eee; padding: 10px; text-align: center; border-top: 1px solid #ccc; display: flex; justify-content: center; gap: 10px; }
-        .btn-save { background: #000080; color: white; border: none; padding: 8px 20px; cursor: pointer; font-weight: bold; }
+        .form-group label { 
+            display: block; 
+            font-size: 13px; 
+            font-weight: bold; 
+            margin-bottom: 5px; 
+            color: #333; 
+        }
+        .form-group input { 
+            width: 100%; 
+            padding: 6px; 
+            border: 1px solid #ccc; 
+            box-sizing: border-box; 
+        }
+        .form-footer { 
+            background: #eee; 
+            padding: 10px; 
+            text-align: center; 
+            border-top: 1px solid #ccc; 
+            display: flex; 
+            justify-content: center; 
+            gap: 10px; 
+        }
+        .btn-save { 
+            background: #000080; 
+            color: white; 
+            border: none; 
+            padding: 8px 20px; 
+            cursor: pointer; 
+            font-weight: bold; 
+        }
         .btn-save:hover { background: #0000a0; }
-        .btn-cancel { background: #ccc; color: #333; text-decoration: none; padding: 7px 20px; font-size: 13px; border: 1px solid #999; }
-        .error { color: red; font-size: 12px; margin-bottom: 10px; text-align: center; }
+        .btn-cancel { 
+            background: #ccc; 
+            color: #333; 
+            text-decoration: none; 
+            padding: 7px 20px; 
+            font-size: 13px; 
+            border: 1px solid #999; 
+        }
+        .error { 
+            color: red; 
+            font-size: 12px; 
+            margin-bottom: 10px; 
+            text-align: center; 
+        }
     </style>
 </head>
 <body>
@@ -63,7 +119,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
             
             <div class="form-group">
                 <label>% lương lái du lịch:</label>
-                <input type="number" name="phan_tram_luong_lai_xe" value="<?php echo htmlspecialchars($row['phan_tram_luong_lai_xe']); ?>">
+                <input type="number" name="phan_tram_luong_lai_xe" value="<?php echo htmlspecialchars($row['phan_tram_luong_lai_xe']); ?>" step="0.01">
             </div>
         </div>
         

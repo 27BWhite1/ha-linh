@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $bien_so       = $_POST['bien_so'] ?? '';
     $loai_xe       = $_POST['loai_xe'] ?? '';
     $lai_xe        = $_POST['lai_xe'] ?? '';
-    $thue_lai      = intval($_POST['thue_lai'] ?? 0);          // 0 hoặc 1
+    $thue_lai      = intval($_POST['thue_lai'] ?? 0);          
     $ten_thue_lai  = $_POST['ten_thue_lai'] ?? '';
     $chu_xe        = $_POST['chu_xe'] ?? '';
     $loai_hinh     = $_POST['loai_hinh'] ?? 'Xe nhà';
@@ -36,7 +36,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
              lai_xe_thu, lai_xe_nop, lai_xe_chi, ghi_chu)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
-        // 10s + 9i + 1s = 20
         $stmt->bind_param("ssssssssssiiiiiiiiis",
             $ngay_di, $ngay_ve, $hanh_trinh, $khach_hang,
             $bien_so, $loai_xe, $lai_xe, $ten_thue_lai, $chu_xe, $loai_hinh,
@@ -44,7 +43,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $tien_thue_xe, $tien_thue_lai,
             $lai_xe_thu, $lai_xe_nop, $lai_xe_chi, $ghi_chu
         );
-
     } else {
         $stmt = $conn->prepare("UPDATE xe_chay_du_lich SET
             ngay_di=?, ngay_ve=?, hanh_trinh=?, khach_hang=?,
@@ -54,7 +52,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             lai_xe_thu=?, lai_xe_nop=?, lai_xe_chi=?, ghi_chu=?
             WHERE id=?");
 
-        // 10s + 9i + 1s + 1i(WHERE) = 21
         $stmt->bind_param("ssssssssssiiiiiiiiisi",
             $ngay_di, $ngay_ve, $hanh_trinh, $khach_hang,
             $bien_so, $loai_xe, $lai_xe, $ten_thue_lai, $chu_xe, $loai_hinh,
@@ -64,7 +61,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $edit_id
         );
     }
-
     if ($stmt->execute()) {
         header("Location: xe_chay_du_lich.php");
         exit();

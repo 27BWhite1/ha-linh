@@ -37,11 +37,32 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta charset="UTF-8">
     <title>Cập nhật Hãng vận tải</title>
     <style>
-        .form-container { width: 400px; margin: 50px auto; padding: 20px; border: 1px solid #ccc; font-family: Arial; }
+        .form-container { 
+            width: 400px; 
+            margin: 50px auto; 
+            padding: 20px; 
+            border: 1px solid #ccc; 
+            font-family: Arial; 
+        }
         .form-group { margin-bottom: 15px; }
-        label { display: block; margin-bottom: 5px; font-weight: bold; }
-        input { width: 100%; padding: 8px; box-sizing: border-box; border: 1px solid #ccc; }
-        .btn-save { background: #000080; color: white; padding: 10px 20px; border: none; cursor: pointer; }
+        label { 
+            display: block; 
+            margin-bottom: 5px; 
+            font-weight: bold; 
+        }
+        input { 
+            width: 100%; 
+            padding: 8px; 
+            box-sizing: border-box; 
+            border: 1px solid #ccc; 
+        }
+        .btn-save { 
+            background: #000080; 
+            color: white; 
+            padding: 10px 20px; 
+            border: none; 
+            cursor: pointer; 
+        }
         .btn-save:hover { background: #0000aa; }
     </style>
 </head>

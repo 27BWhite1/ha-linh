@@ -38,12 +38,41 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
     <meta charset="UTF-8">
     <style>
-        body { font-family: Arial; padding: 15px; font-size: 13px; background: #f9f9f9; }
-        .f-row { margin-bottom: 10px; display: flex; align-items: center; }
-        label { width: 110px; font-weight: bold; color: #333; }
-        input, select { flex: 1; padding: 6px; border: 1px solid #ccc; }
-        .footer { text-align: center; margin-top: 20px; border-top: 1px solid #ddd; padding-top: 15px; }
-        .btn-save { background: #000080; color: white; padding: 8px 25px; border: none; cursor: pointer; font-weight: bold; }
+        body { 
+            font-family: Arial; 
+            padding: 15px; 
+            font-size: 13px; 
+            background: #f9f9f9; 
+        }
+        .f-row { 
+            margin-bottom: 10px; 
+            display: flex; 
+            align-items: center; 
+        }
+        label { 
+            width: 110px; 
+            font-weight: bold; 
+            color: #333; 
+        }
+        input, select { 
+            flex: 1; 
+            padding: 6px; 
+            border: 1px solid #ccc; 
+        }
+        .footer { 
+            text-align: center; 
+            margin-top: 20px; 
+            border-top: 1px solid #ddd; 
+            padding-top: 15px; 
+        }
+        .btn-save { 
+            background: #000080; 
+            color: white; 
+            padding: 8px 25px; 
+            border: none; 
+            cursor: pointer; 
+            font-weight: bold; 
+        }
     </style>
 </head>
 <body>
@@ -68,7 +97,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </div>
     <div class="f-row">
         <label>Lái xe:</label>
-        <!-- Sửa lỗi: dropdown chọn lái xe từ danh sách thay vì nhập tay -->
         <select name="ma_lai_xe" id="sel_lai_xe" onchange="fillTenLaiXe(this)">
             <option value="">-- Chọn lái xe --</option>
             <?php

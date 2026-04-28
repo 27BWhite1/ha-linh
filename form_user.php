@@ -25,12 +25,37 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <html>
 <head>
     <style>
-        body { font-family: Arial; padding: 20px; font-size: 13px; background: #f9f9f9; }
-        .form-group { margin-bottom: 10px; display: flex; align-items: center; }
+        body { 
+            font-family: Arial; 
+            padding: 20px; 
+            font-size: 13px; 
+            background: #f9f9f9; 
+        }
+        .form-group { 
+            margin-bottom: 10px; 
+            display: flex; 
+            align-items: center; 
+        }
         .form-group label { width: 100px; }
-        .form-group input, .form-group select { flex: 1; padding: 5px; border: 1px solid #ccc; }
-        .footer { text-align: center; margin-top: 20px; border-top: 1px solid #ccc; padding-top: 15px; }
-        .btn-save { background: #000080; color: #fff; padding: 8px 20px; border: none; cursor: pointer; font-weight: bold; }
+        .form-group input, .form-group select { 
+            flex: 1; 
+            padding: 5px; 
+            border: 1px solid #ccc; 
+        }
+        .footer { 
+            text-align: center; 
+            margin-top: 20px; 
+            border-top: 1px solid #ccc; 
+            padding-top: 15px; 
+        }
+        .btn-save { 
+            background: #000080; 
+            color: #fff; 
+            padding: 8px 20px; 
+            border: none; 
+            cursor: pointer; 
+            font-weight: bold; 
+        }
     </style>
 </head>
 <body>

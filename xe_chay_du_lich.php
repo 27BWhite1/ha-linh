@@ -48,133 +48,167 @@ $conn->query("ALTER TABLE xe_chay_du_lich DROP COLUMN IF EXISTS `tien_hdv`");
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <title>Quản lý xe chạy Du lịch - Hà Linh</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý xe chạy Du lịch – Hà Linh</title>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        * { box-sizing: border-box; }
-        body { font-family: Tahoma, sans-serif; font-size: 12px; background: #f0f0f0; margin: 0; padding: 0; }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Be Vietnam Pro', sans-serif; background: #f1f3f8; color: #1a1f36; font-size: 12px; }
 
-        .main-container { margin: 8px; border: 2px solid #999; background: #fff; padding: 10px; }
-        .title { color: #be0000; text-align: center; font-weight: bold; font-size: 17px; margin: 0 0 10px 0; letter-spacing: 1px; border-bottom: 2px double #be0000; padding-bottom: 6px; }
+        /* ── Page ── */
+        .page-wrapper { margin: 20px; padding-bottom: 32px; }
+        .breadcrumb { display: flex; align-items: center; gap: 6px; margin-bottom: 14px; font-size: 12px; color: #9ca3af; }
+        .breadcrumb a { color: #be0000; text-decoration: none; font-weight: 500; }
+
+        /* ── Card ── */
+        .main-container { background: #fff; border-radius: 16px; box-shadow: 0 4px 24px rgba(0,0,0,.07); overflow: hidden; margin-bottom: 12px; }
+
+        /* ── Card header ── */
+        .title {
+            background: linear-gradient(135deg, #be0000 0%, #7b0000 100%);
+            padding: 18px 28px 14px; position: relative; overflow: hidden;
+            color: #fff; font-size: 18px; font-weight: 700; letter-spacing: .3px;
+        }
+        .title::after { content: ''; position: absolute; right: -40px; top: -40px; width: 180px; height: 180px; border-radius: 50%; background: rgba(255,255,255,.07); }
+        .title small { display: block; color: rgba(255,255,255,.6); font-size: 11px; font-weight: 400; margin-top: 3px; }
+
+        /* ── Form panel ── */
         .form-panel {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
             gap: 0;
-            border: 1px solid #aaa;
-            margin-bottom: 8px;
+            border-bottom: 1px solid #f0f0f5;
         }
-        .form-col {
-            padding: 8px 10px;
-            border-right: 1px solid #ccc;
-        }
+        .form-col { padding: 14px 18px; border-right: 1px solid #f0f0f5; }
         .form-col:last-child { border-right: none; }
         .col-title {
-            font-weight: bold;
-            color: #000080;
-            background: #e8e8f5;
-            padding: 4px 6px;
-            margin: -8px -10px 8px -10px;
-            font-size: 11px;
-            border-bottom: 1px solid #ccc;
+            font-size: 10px; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 1px; color: #9ca3af; margin-bottom: 12px;
         }
-        .field-row { display: flex; align-items: center; margin-bottom: 5px; }
-        .field-row label { width: 110px; flex-shrink: 0; font-weight: bold; color: #333; font-size: 11px; }
+
+        .field-row { display: flex; align-items: center; margin-bottom: 7px; }
+        .field-row label { width: 115px; flex-shrink: 0; font-size: 12px; font-weight: 600; color: #6b7280; }
         .field-row input[type="text"],
         .field-row input[type="date"],
         .field-row input[type="number"],
-        .field-row select { flex: 1; border: 1px solid #7f9db9; padding: 3px 5px; height: 22px; font-size: 11px; font-family: Tahoma, sans-serif; }
-        .field-row input[readonly] { background: #f0f0f0; color: #555; }
+        .field-row select {
+            flex: 1; border: 1px solid #e5e7eb; border-radius: 6px;
+            padding: 4px 8px; height: 28px; font-size: 12px;
+            font-family: inherit; color: #1a1f36; background: #fff;
+            transition: border-color .15s, box-shadow .15s;
+        }
+        .field-row input:focus, .field-row select:focus { outline: none; border-color: #be0000; box-shadow: 0 0 0 3px rgba(190,0,0,.07); }
+        .field-row input[readonly] { background: #f8f9fc; color: #9ca3af; }
         .field-row .inline-group { display: flex; gap: 5px; flex: 1; align-items: center; }
         .field-row .inline-group label { width: auto; }
+
+        /* Lợi nhuận special */
+        .field-row input.profit-field {
+            background: #f0fdf4; border-color: #bbf7d0; color: #166534; font-weight: 700; font-size: 13px;
+        }
+        /* Lái xe thu/nộp/chi highlight */
+        .field-row input.driver-money {
+            background: #eff6ff; border-color: #bfdbfe; color: #1e40af;
+        }
+
+        /* ── Filter bar ── */
+        .filter-bar {
+            background: #f8f9fc; border-bottom: 1px solid #f0f0f5;
+            padding: 8px 20px; display: flex; gap: 10px;
+            align-items: center; flex-wrap: wrap;
+        }
+        .filter-bar label { font-size: 11px; font-weight: 600; color: #6b7280; }
+        .filter-bar input, .filter-bar select {
+            border: 1px solid #e5e7eb; border-radius: 6px;
+            padding: 3px 8px; height: 26px; font-size: 11px;
+            font-family: inherit; background: #fff;
+        }
+        .filter-bar input:focus, .filter-bar select:focus { outline: none; border-color: #be0000; }
+        .btn-filter-reset {
+            padding: 4px 12px; border-radius: 6px; border: 1px solid #e5e7eb;
+            background: #fff; color: #6b7280; font-size: 11px; font-weight: 600;
+            cursor: pointer; font-family: inherit;
+        }
+        .btn-filter-reset:hover { background: #f3f4f6; }
+
+        /* ── Toolbar ── */
         .toolbar {
-            background: #e1e1e1;
-            border: 1px solid #bbb;
-            padding: 5px 8px;
-            margin-bottom: 8px;
-            display: flex;
-            gap: 5px;
-            align-items: center;
+            display: flex; gap: 7px; padding: 10px 18px;
+            border-bottom: 1px solid #f0f0f5; flex-wrap: wrap; align-items: center;
+            background: #fff;
         }
         .btn {
-            border: 1px solid #888;
-            padding: 4px 14px;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 12px;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            background: #eee;
-            font-family: Tahoma, sans-serif;
+            display: inline-flex; align-items: center; gap: 5px;
+            padding: 7px 15px; border-radius: 8px; font-family: inherit;
+            font-size: 12px; font-weight: 600; cursor: pointer; border: none;
+            transition: all .18s;
         }
-        .btn:hover { background: #d0d0d0; }
-        .btn-add  { color: green; }
-        .btn-edit { color: blue; }
-        .btn-del  { color: red; }
-        .btn-exit { color: #555; }
+        .btn-add  { background: #be0000; color: #fff; }
+        .btn-add:hover  { background: #950000; transform: translateY(-1px); box-shadow: 0 4px 10px rgba(190,0,0,.3); }
+        .btn-edit { background: #eef0f7; color: #3a4060; }
+        .btn-edit:hover { background: #e0e3f0; transform: translateY(-1px); }
+        .btn-del  { background: #fff0f0; color: #c62828; }
+        .btn-del:hover  { background: #ffe0e0; transform: translateY(-1px); }
+        .btn-exit { background: transparent; color: #6b7280; border: 1px solid #e5e7eb; }
+        .btn-exit:hover { background: #f9fafb; }
+        .btn-new  { background: transparent; color: #6b7280; border: 1px solid #e5e7eb; }
+        .btn-new:hover  { background: #f9fafb; }
 
-        .summary-bar {
-            margin-left: auto;
-            font-size: 11px;
-            color: #333;
-            display: flex;
-            gap: 15px;
-        }
-        .summary-item { display: flex; flex-direction: column; align-items: center; }
+        /* Summary bar */
+        .summary-bar { margin-left: auto; display: flex; gap: 8px; }
+        .sbox { background: #f8f9fc; border: 1px solid #eef0f7; border-radius: 8px; padding: 4px 12px; text-align: center; font-size: 10px; color: #9ca3af; }
+        .sbox strong { display: block; font-size: 12px; font-weight: 700; color: #1a1f36; margin-top: 1px; }
+        .sbox.green { background: #f0fdf4; border-color: #bbf7d0; }
+        .sbox.green strong { color: #166534; }
+        .sbox.red { background: #fff5f5; border-color: #fecaca; }
+        .sbox.red strong { color: #c62828; }
         .summary-value { font-weight: bold; color: #000080; font-size: 13px; }
-        .grid-wrapper {
-            height: 380px;
-            overflow: auto;
-            border: 1px solid #999;
-        }
-        #mainTable { width: 100%; border-collapse: collapse; min-width: 1600px; }
+
+        /* ── Table ── */
+        .table-wrap { background: #fff; border-radius: 0 0 16px 16px; }
+        .grid-wrapper { height: calc(100vh - 500px); min-height: 240px; overflow: auto; }
+        #mainTable { width: 100%; border-collapse: collapse; min-width: 1800px; }
         #mainTable th {
-            background: #000080;
-            color: white;
-            border: 1px solid #1111aa;
-            padding: 5px 4px;
-            position: sticky;
-            top: 0;
-            font-weight: normal;
-            font-size: 11px;
-            white-space: nowrap;
+            background: #f8f9fc; color: #8892a4;
+            border-bottom: 2px solid #eef0f7; border-right: 1px solid #f3f4f8;
+            padding: 9px 10px; position: sticky; top: 0;
+            font-size: 10.5px; font-weight: 700; text-transform: uppercase;
+            letter-spacing: .5px; white-space: nowrap; text-align: center; z-index: 10;
         }
         #mainTable td {
-            border: 1px solid #ccc;
-            padding: 3px 5px;
-            white-space: nowrap;
-            font-size: 11px;
+            border-bottom: 1px solid #f3f4f8; border-right: 1px solid #f3f4f8;
+            padding: 9px 10px; white-space: nowrap; font-size: 12px;
+            color: #374151; text-align: center;
         }
-        #mainTable tr:hover { background: #fffde0; cursor: pointer; }
-        #mainTable tr.row-selected { background: #0000cc !important; color: white; }
-        #mainTable tr.row-selected td { color: white; }
+        #mainTable tbody tr:hover { background: #fdf5f5; cursor: pointer; }
+        #mainTable tbody tr:last-child td { border-bottom: none; }
+        #mainTable tr.row-selected { background: #fff5f5 !important; }
+        #mainTable tr.row-selected td { color: #1a1f36; }
 
-        .col-money { text-align: right !important; color: #000080; font-weight: bold; }
+        .col-money { text-align: right !important; font-weight: 700; color: #1a1f36; }
         .col-center { text-align: center !important; }
-        .filter-bar {
-            background: #f9f9f9;
-            border: 1px solid #ccc;
-            padding: 5px 10px;
-            margin-bottom: 5px;
-            display: flex;
-            gap: 10px;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-        .filter-bar label { font-weight: bold; font-size: 11px; }
-        .filter-bar input, .filter-bar select {
-            border: 1px solid #ccc;
-            padding: 2px 5px;
-            height: 22px;
-            font-size: 11px;
-        }
+        .col-profit-pos { text-align: right !important; font-weight: 700; color: #166534; }
+        .col-profit-neg { text-align: right !important; font-weight: 700; color: #c62828; }
+
+        /* Plate */
+        .plate { display: inline-block; background: #1a1f36; color: #fff; padding: 2px 7px; border-radius: 4px; font-size: 11px; font-weight: 800; font-family: monospace; letter-spacing: 1px; }
     </style>
 </head>
 <body>
 
 <?php include 'navbar.php'; ?>
 
+<div class="page-wrapper">
+    <div class="breadcrumb">
+        <a href="index.php">Trang chủ</a> <span>›</span>
+        <span>Quản lý xe chạy</span> <span>›</span>
+        <span>Xe chạy Du lịch</span>
+    </div>
+
 <div class="main-container">
-    <div class="title">🌴 QUẢN LÝ XE CHẠY DU LỊCH</div>
+    <div class="title">🌴 QUẢN LÝ XE CHẠY DU LỊCH
+        <small>Nhập, sửa và theo dõi các chuyến xe du lịch</small>
+    </div>
 
     <form id="mainForm" method="POST" action="save_xe_du_lich.php">
         <input type="hidden" name="action" id="form_action" value="add">
@@ -307,29 +341,31 @@ $conn->query("ALTER TABLE xe_chay_du_lich DROP COLUMN IF EXISTS `tien_hdv`");
             <button type="button" onclick="resetFilter()" class="btn" style="padding:2px 10px; font-size:11px;">↩ Bỏ lọc</button>
         </div>
         <div class="toolbar">
-            <button type="button" class="btn btn-add"  onclick="submitAdd()">✚ Thêm (Alt+A)</button>
-            <button type="button" class="btn btn-edit" onclick="submitEdit()">💾 Sửa (Alt+E)</button>
-            <button type="button" class="btn btn-del"  onclick="deleteRow()">✖ Xóa (Alt+D)</button>
-            <button type="button" class="btn"          onclick="clearForm()">🔄 Làm mới</button>
-            <button type="button" class="btn btn-exit" onclick="window.location.href='index.php'">🚪 Thoát (Esc)</button>
-
-            <div class="summary-bar" id="summaryBar">
-                <div class="summary-item">
-                    <span>Tổng chuyến</span>
-                    <span class="summary-value" id="sum_count">0</span>
-                </div>
-                <div class="summary-item">
-                    <span>Tổng doanh thu</span>
-                    <span class="summary-value" id="sum_dongia">0</span>
-                </div>
-                <div class="summary-item">
-                    <span>Tổng chi phí</span>
-                    <span class="summary-value" id="sum_chiphi">0</span>
-                </div>
-                <div class="summary-item">
-                    <span>Lợi nhuận</span>
-                    <span class="summary-value" id="sum_loinhuan" style="color:green;">0</span>
-                </div>
+            <button type="button" class="btn btn-add"  onclick="submitAdd()">
+                <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+                Thêm (Alt+A)
+            </button>
+            <button type="button" class="btn btn-edit" onclick="submitEdit()">
+                <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                Sửa (Alt+E)
+            </button>
+            <button type="button" class="btn btn-del"  onclick="deleteRow()">
+                <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+                Xóa (Alt+D)
+            </button>
+            <button type="button" class="btn btn-new" onclick="clearForm()">
+                <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+                Làm mới
+            </button>
+            <button type="button" class="btn btn-exit" onclick="window.location.href='index.php'">
+                <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                Thoát (Esc)
+            </button>
+            <div class="summary-bar">
+                <div class="sbox">Tổng chuyến<strong id="sum_count">0</strong></div>
+                <div class="sbox">Tổng doanh thu<strong id="sum_dongia">0</strong></div>
+                <div class="sbox red">Tổng chi phí<strong id="sum_chiphi">0</strong></div>
+                <div class="sbox green">Lợi nhuận<strong id="sum_loinhuan">0</strong></div>
             </div>
         </div>
     </form>
@@ -416,8 +452,9 @@ $conn->query("ALTER TABLE xe_chay_du_lich DROP COLUMN IF EXISTS `tien_hdv`");
                 <?php endwhile; ?>
             </tbody>
         </table>
-    </div>
-</div>
+    </div><!-- grid-wrapper -->
+</div><!-- main-container -->
+</div><!-- page-wrapper -->
 
 <script>
 let selectedRow = null;

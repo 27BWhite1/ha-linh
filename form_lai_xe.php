@@ -37,21 +37,44 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
     <meta charset="UTF-8">
     <style>
-        body { font-family: Arial; padding: 20px; font-size: 13px; }
+        body { 
+            font-family: Arial; 
+            padding: 20px; 
+            font-size: 13px; 
+        }
         .form-group { margin-bottom: 10px; }
-        label { display: inline-block; width: 130px; }
+        label { 
+            display: inline-block; 
+            width: 130px; 
+        }
         input[type="text"], input[type="number"], input[type="date"] { width: 220px; padding: 5px; border: 1px solid #ccc; }
-        .footer { margin-top: 20px; text-align: center; }
+        .footer { 
+            margin-top: 20px; 
+            text-align: center; 
+        }
     </style>
 </head>
 <body>
 <form method="POST">
-    <div class="form-group"><label>Mã lái xe:</label><input type="text" name="ma_lai_xe" value="<?php echo htmlspecialchars($row['ma_lai_xe']); ?>" required></div>
-    <div class="form-group"><label>Tên lái xe:</label><input type="text" name="ten_lai_xe" value="<?php echo htmlspecialchars($row['ten_lai_xe']); ?>" required></div>
-    <div class="form-group"><label>Số CCCD:</label><input type="text" name="so_cccd" value="<?php echo htmlspecialchars($row['so_cccd']); ?>"></div>
-    <div class="form-group"><label>Lương trách nhiệm:</label><input type="number" name="luong_trach_nhiem" value="<?php echo $row['luong_trach_nhiem']; ?>"></div>
     <div class="form-group">
-        <label>Đã nghỉ:</label><input type="checkbox" name="da_nghi" <?php echo $row['da_nghi'] ? 'checked' : ''; ?>>
+        <label>Mã lái xe:</label>
+        <input type="text" name="ma_lai_xe" value="<?php echo htmlspecialchars($row['ma_lai_xe']); ?>" required>
+    </div>
+    <div class="form-group">
+        <label>Tên lái xe:</label>
+        <input type="text" name="ten_lai_xe" value="<?php echo htmlspecialchars($row['ten_lai_xe']); ?>" required>
+    </div>
+    <div class="form-group">
+        <label>Số CCCD:</label>
+        <input type="text" name="so_cccd" value="<?php echo htmlspecialchars($row['so_cccd']); ?>">
+    </div>
+    <div class="form-group">
+        <label>Lương trách nhiệm:</label>
+        <input type="number" name="luong_trach_nhiem" value="<?php echo $row['luong_trach_nhiem']; ?>">
+    </div>
+    <div class="form-group">
+        <label>Đã nghỉ:</label>
+        <input type="checkbox" name="da_nghi" <?php echo $row['da_nghi'] ? 'checked' : ''; ?>>
         <label style="width:auto; margin-left:20px;">Ngày nghỉ:</label>
         <input type="date" name="ngay_nghi" style="width:130px;" value="<?php echo $row['ngay_nghi']; ?>">
     </div>

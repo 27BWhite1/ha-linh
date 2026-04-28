@@ -1,11 +1,6 @@
 <style>
-/* ═══════════════════════════════════════════
-   NAVBAR – Ha Linh Transport (redesign 2026)
-═══════════════════════════════════════════ */
 @import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap');
-
 *, *::before, *::after { box-sizing: border-box; }
-
 .hl-navbar {
     font-family: 'Be Vietnam Pro', sans-serif;
     background: #fff;
@@ -14,8 +9,6 @@
     top: 0;
     z-index: 500;
 }
-
-/* ── Top bar ── */
 .hl-topbar {
     display: flex;
     align-items: center;
@@ -24,8 +17,6 @@
     height: 64px;
     border-bottom: 1px solid #f3f4f8;
 }
-
-/* Logo */
 .hl-logo {
     display: flex;
     align-items: center;
@@ -55,8 +46,6 @@
     letter-spacing: 1.5px;
     text-transform: uppercase;
 }
-
-/* User area */
 .hl-user {
     display: flex;
     align-items: center;
@@ -78,7 +67,8 @@
     color: #fff;
     font-size: 12px;
     font-weight: 700;
-    display: flex; align-items: center; justify-content: center;
+    display: flex; align-items: center; 
+    justify-content: center;
     flex-shrink: 0;
 }
 .hl-user-name {
@@ -110,8 +100,6 @@
     color: #fff;
     border-color: #be0000;
 }
-
-/* ── Menu bar ── */
 .hl-menubar {
     display: flex;
     align-items: center;
@@ -119,11 +107,9 @@
     height: 44px;
     gap: 2px;
 }
-
 .hl-menu-item {
     position: relative;
 }
-
 .hl-menu-link {
     display: flex;
     align-items: center;
@@ -149,15 +135,16 @@
 .hl-menu-link.active::after {
     content: '';
     position: absolute;
-    bottom: 0; left: 14px; right: 14px;
+    bottom: 0; 
+    left: 14px; 
+    right: 14px;
     height: 2px;
     background: #be0000;
     border-radius: 2px 2px 0 0;
 }
-
-/* chevron */
 .hl-chevron {
-    width: 14px; height: 14px;
+    width: 14px; 
+    height: 14px;
     opacity: .5;
     transition: transform .2s;
     flex-shrink: 0;
@@ -166,8 +153,6 @@
     transform: rotate(180deg);
     opacity: 1;
 }
-
-/* dropdown */
 .hl-dropdown {
     display: none;
     position: absolute;
@@ -187,7 +172,6 @@
     to   { opacity: 1; transform: translateY(0); }
 }
 .hl-menu-item:hover .hl-dropdown { display: block; }
-
 .hl-dropdown-item {
     display: flex;
     align-items: center;
@@ -205,16 +189,18 @@
     color: #be0000;
 }
 .hl-dropdown-item .icon {
-    width: 26px; height: 26px;
+    width: 26px; 
+    height: 26px;
     background: #f3f4f6;
     border-radius: 6px;
-    display: flex; align-items: center; justify-content: center;
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
     font-size: 14px;
     flex-shrink: 0;
     transition: background .12s;
 }
 .hl-dropdown-item:hover .icon { background: #fef2f2; }
-
 .hl-dropdown-sep {
     height: 1px;
     background: #f3f4f8;
@@ -223,7 +209,6 @@
 </style>
 
 <header class="hl-navbar">
-    <!-- Top bar -->
     <div class="hl-topbar">
         <a href="index.php" class="hl-logo">
             <img src="logo_ha_linh.png" alt="Hà Linh" onerror="this.style.display='none'">
@@ -258,7 +243,6 @@
         </div>
     </div>
 
-    <!-- Menu bar -->
     <nav class="hl-menubar">
 
         <?php if (isset($_SESSION['role']) && $_SESSION['role'] == 'Quản lý'): ?>
@@ -332,6 +316,5 @@
                 <a href="bang_loi_nhuan_theo_thang.php" class="hl-dropdown-item"><span class="icon">💹</span> Lợi nhuận theo tháng</a>
             </div>
         </div>
-
     </nav>
 </header>

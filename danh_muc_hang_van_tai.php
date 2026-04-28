@@ -20,98 +20,234 @@ while ($row = $result->fetch_assoc()) $rows[] = $row;
     <title>Danh mục Hãng vận tải – Hà Linh</title>
     <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Be Vietnam Pro', sans-serif; background: #f1f3f8; color: #1a1f36; min-height: 100vh; }
-
-        .page-wrapper { margin: 24px 28px; padding: 0 0 40px; }
-
-        .breadcrumb { display: flex; align-items: center; gap: 6px; margin-bottom: 16px; font-size: 12px; color: #9ca3af; }
-        .breadcrumb a { color: #be0000; text-decoration: none; font-weight: 500; }
+        *, *::before, *::after { 
+            box-sizing: border-box; 
+            margin: 0; 
+            padding: 0; 
+        }
+        body { 
+            font-family: 'Be Vietnam Pro', sans-serif; 
+            background: #f1f3f8; 
+            color: #1a1f36; 
+            min-height: 100vh; 
+        }
+        .page-wrapper { 
+            margin: 24px 28px; 
+            padding: 0 0 40px; 
+        }
+        .breadcrumb { 
+            display: flex; 
+            align-items: center; 
+            gap: 6px; 
+            margin-bottom: 16px; 
+            font-size: 12px; 
+            color: #9ca3af; 
+        }
+        .breadcrumb a { 
+            color: #be0000; 
+            text-decoration: none; 
+            font-weight: 500; 
+        }
         .breadcrumb a:hover { text-decoration: underline; }
 
-        .card { background: #fff; border-radius: 16px; box-shadow: 0 4px 24px rgba(0,0,0,.07); overflow: hidden; }
-
+        .card { 
+            background: #fff; 
+            border-radius: 16px; 
+            box-shadow: 0 4px 24px rgba(0,0,0,.07); 
+            overflow: hidden; 
+        }
         .card-header {
             background: linear-gradient(135deg, #be0000 0%, #7b0000 100%);
-            padding: 24px 32px 20px; position: relative; overflow: hidden;
+            padding: 24px 32px 20px; 
+            position: relative; 
+            overflow: hidden;
         }
         .card-header::after {
-            content: ''; position: absolute; right: -40px; top: -40px;
-            width: 180px; height: 180px; border-radius: 50%;
+            content: ''; 
+            position: absolute; 
+            right: -40px; 
+            top: -40px;
+            width: 180px; 
+            height: 180px; 
+            border-radius: 50%;
             background: rgba(255,255,255,.07);
         }
-        .card-header h1 { color: #fff; font-size: 20px; font-weight: 700; position: relative; }
-        .card-header p  { color: rgba(255,255,255,.65); font-size: 12px; margin-top: 4px; position: relative; }
-
-        .toolbar { display: flex; gap: 8px; padding: 16px 24px; border-bottom: 1px solid #f0f0f5; flex-wrap: wrap; }
-
-        .btn {
-            display: inline-flex; align-items: center; gap: 6px;
-            padding: 8px 18px; border-radius: 8px; font-family: inherit;
-            font-size: 13px; font-weight: 600; cursor: pointer; border: none;
-            transition: all .18s; text-decoration: none;
+        .card-header h1 { 
+            color: #fff; 
+            font-size: 20px; 
+            font-weight: 700; 
+            position: relative; 
         }
-        .btn-primary  { background: #be0000; color: #fff; }
-        .btn-primary:hover  { background: #950000; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(190,0,0,.3); }
-        .btn-secondary { background: #eef0f7; color: #3a4060; }
-        .btn-secondary:hover { background: #e0e3f0; transform: translateY(-1px); }
-        .btn-danger   { background: #fff0f0; color: #c62828; }
-        .btn-danger:hover   { background: #ffe0e0; transform: translateY(-1px); }
-        .btn-ghost    { background: transparent; color: #6b7280; border: 1px solid #e5e7eb; margin-left: auto; }
+        .card-header p  { 
+            color: rgba(255,255,255,.65); 
+            font-size: 12px; 
+            margin-top: 4px; 
+            position: relative; 
+        }
+        .toolbar { 
+            display: flex; 
+            gap: 8px; 
+            padding: 16px 24px; 
+            border-bottom: 1px solid #f0f0f5; 
+            flex-wrap: wrap; 
+        }
+        .btn {
+            display: inline-flex; 
+            align-items: center; 
+            gap: 6px;
+            padding: 8px 18px; 
+            border-radius: 8px; 
+            font-family: inherit;
+            font-size: 13px; 
+            font-weight: 600; 
+            cursor: pointer; 
+            border: none;
+            transition: all .18s; 
+            text-decoration: none;
+        }
+        .btn-primary  { 
+            background: #be0000; 
+            color: #fff; 
+        }
+        .btn-primary:hover  { 
+            background: #950000; 
+            transform: translateY(-1px); 
+            box-shadow: 0 4px 12px rgba(190,0,0,.3); 
+        }
+        .btn-secondary { 
+            background: #eef0f7; 
+            color: #3a4060; 
+        }
+        .btn-secondary:hover { 
+            background: #e0e3f0; 
+            transform: translateY(-1px); 
+        }
+        .btn-danger   { 
+            background: #fff0f0; 
+            color: #c62828; 
+        }
+        .btn-danger:hover   { 
+            background: #ffe0e0; 
+            transform: translateY(-1px); 
+        }
+        .btn-ghost    { 
+            background: transparent; 
+            color: #6b7280; 
+            border: 1px solid #e5e7eb; 
+            margin-left: auto; 
+        }
         .btn-ghost:hover    { background: #f9fafb; }
-
-        .search-wrap { padding: 12px 24px; border-bottom: 1px solid #f0f0f5; }
+        .search-wrap { 
+            padding: 12px 24px; 
+            border-bottom: 1px solid #f0f0f5; 
+        }
         .search-input {
-            width: 280px; padding: 8px 14px 8px 36px;
-            border: 1px solid #e5e7eb; border-radius: 8px;
-            font-family: inherit; font-size: 13px; color: #374151;
+            width: 280px; 
+            padding: 8px 14px 8px 36px;
+            border: 1px solid #e5e7eb; 
+            border-radius: 8px;
+            font-family: inherit; 
+            font-size: 13px; 
+            color: #374151;
             background: #f8f9fc url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' fill='none' stroke='%239ca3af' stroke-width='2' viewBox='0 0 24 24'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='M21 21l-4.35-4.35'/%3E%3C/svg%3E") 12px center no-repeat;
             transition: border-color .15s, box-shadow .15s;
         }
-        .search-input:focus { outline: none; border-color: #be0000; box-shadow: 0 0 0 3px rgba(190,0,0,.08); background-color: #fff; }
-
-        .table-wrap { overflow-x: auto; }
-        table { width: 100%; border-collapse: collapse; }
-        thead tr { background: #f8f9fc; border-bottom: 2px solid #eef0f7; }
-        th {
-            padding: 11px 20px; text-align: left;
-            font-size: 11px; font-weight: 700;
-            text-transform: uppercase; letter-spacing: .8px; color: #8892a4;
+        .search-input:focus { 
+            outline: none; 
+            border-color: #be0000; 
+            box-shadow: 0 0 0 3px rgba(190,0,0,.08); 
+            background-color: #fff; 
         }
-        th:first-child, th:nth-child(2) { width: 52px; text-align: center; }
-
-        tbody tr { border-bottom: 1px solid #f3f4f8; transition: background .12s; cursor: pointer; }
+        .table-wrap { overflow-x: auto; }
+        table { 
+            width: 100%; 
+            border-collapse: collapse; 
+        }
+        thead tr { 
+            background: #f8f9fc; 
+            border-bottom: 2px solid #eef0f7; 
+        }
+        th {
+            padding: 11px 20px; 
+            text-align: left;
+            font-size: 11px; 
+            font-weight: 700;
+            text-transform: uppercase; 
+            letter-spacing: .8px; 
+            color: #8892a4;
+        }
+        th:first-child, th:nth-child(2) { 
+            width: 52px; 
+            text-align: center; 
+        }
+        tbody tr { 
+            border-bottom: 1px solid #f3f4f8; 
+            transition: background .12s; 
+            cursor: pointer; 
+        }
         tbody tr:last-child { border-bottom: none; }
         tbody tr:hover { background: #fdf5f5; }
         tbody tr.selected { background: #fff5f5; }
-
-        td { padding: 13px 20px; font-size: 13.5px; color: #374151; }
+        td { 
+            padding: 13px 20px; 
+            font-size: 13.5px; 
+            color: #374151; 
+        }
         td:first-child, td:nth-child(2) { text-align: center; }
-        td:nth-child(2) { color: #9ca3af; font-size: 12px; }
-
-        .hang-cell { display: flex; align-items: center; gap: 10px; }
+        td:nth-child(2) { 
+            color: #9ca3af; 
+            font-size: 12px; 
+        }
+        .hang-cell { 
+            display: flex; 
+            align-items: center; 
+            gap: 10px; 
+        }
         .hang-avatar {
-            width: 34px; height: 34px; border-radius: 8px;
+            width: 34px; 
+            height: 34px; 
+            border-radius: 8px;
             background: linear-gradient(135deg, #be0000, #7b0000);
-            color: #fff; font-size: 13px; font-weight: 700;
-            display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+            color: #fff; 
+            font-size: 13px; 
+            font-weight: 700;
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            flex-shrink: 0;
         }
-        .hang-name { font-weight: 600; color: #1a1f36; }
-
+        .hang-name { 
+            font-weight: 600; 
+            color: #1a1f36; 
+        }
         .code-badge {
-            display: inline-block; padding: 3px 9px; border-radius: 6px;
-            background: #f3f4f6; color: #6b7280;
-            font-size: 11.5px; font-weight: 600; font-family: monospace;
+            display: inline-block; 
+            padding: 3px 9px; 
+            border-radius: 6px;
+            background: #f3f4f6; 
+            color: #6b7280;
+            font-size: 11.5px; 
+            font-weight: 600; 
+            font-family: monospace;
         }
-        .money     { font-weight: 600; color: #374151; }
+        .money     { 
+            font-weight: 600; 
+            color: #374151; 
+        }
         .money-zero { color: #d1d5db; }
-
-        .empty { text-align: center; padding: 48px 20px; color: #9ca3af; }
-
+        .empty { 
+            text-align: center; 
+            padding: 48px 20px; 
+            color: #9ca3af; 
+        }
         .table-footer {
-            padding: 10px 24px; border-top: 1px solid #f3f4f8;
-            font-size: 12px; color: #9ca3af;
-            display: flex; justify-content: space-between; align-items: center;
+            padding: 10px 24px; 
+            border-top: 1px solid #f3f4f8;
+            font-size: 12px; 
+            color: #9ca3af;
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
         }
         .table-footer strong { color: #374151; }
     </style>
@@ -219,18 +355,15 @@ function selectRow(row, id) {
     const cb = row.querySelector('input[type="checkbox"]');
     if (cb) cb.checked = true;
 }
-
 document.getElementById('btnEdit').onclick = function() {
     if (selectedId) window.location.href = 'form_hang_van_tai.php?action=edit&id=' + selectedId;
     else alert('Vui lòng chọn một dòng để sửa!');
 };
-
 document.getElementById('btnDelete').onclick = function() {
     if (!selectedId) { alert('Vui lòng chọn một dòng để xóa!'); return; }
     if (confirm('Bạn có chắc chắn muốn xóa hãng vận tải này?'))
         window.location.href = 'danh_muc_hang_van_tai.php?delete_id=' + selectedId;
 };
-
 function filterRows() {
     const q = document.getElementById('searchInput').value.toUpperCase();
     let count = 0;
@@ -241,7 +374,6 @@ function filterRows() {
     });
     document.getElementById('rowCount').innerText = count;
 }
-
 document.addEventListener('keydown', function(e) {
     if (!e.altKey) return;
     if (e.key.toLowerCase() === 'a') { e.preventDefault(); location.href = 'form_hang_van_tai.php?action=add'; }

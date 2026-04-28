@@ -32,19 +32,72 @@ if ($action == 'edit' && $id > 0) {
     <meta charset="UTF-8">
     <title>Nhập sửa tuyến đường</title>
     <style>
-        body { font-family: "Segoe UI", Tahoma, Arial; font-size: 13px; background-color: #f4f4f4; margin: 0; padding: 10px; }
-        .window-frame { background: #fff; border: 1px solid #707070; box-shadow: 2px 2px 8px rgba(0,0,0,0.2); }
-        .form-table { width: 100%; border-collapse: separate; border-spacing: 5px; padding: 10px; }
-        .label { width: 100px; white-space: nowrap; color: #333; }
+        body { 
+            font-family: "Segoe UI", Tahoma, Arial; 
+            font-size: 13px; 
+            background-color: #f4f4f4; 
+            margin: 0; 
+            padding: 10px; 
+        }
+        .window-frame { 
+            background: #fff; 
+            border: 1px solid #707070; 
+            box-shadow: 2px 2px 8px rgba(0,0,0,0.2); 
+        }
+        .form-table { 
+            width: 100%; 
+            border-collapse: separate; 
+            border-spacing: 5px; 
+            padding: 10px; 
+        }
+        .label { 
+            width: 100px; 
+            white-space: nowrap; 
+            color: #333; 
+        }
         input[type="text"], select { width: 100%; padding: 3px; border: 1px solid #ccc; box-sizing: border-box; font-size: 13px; }
-        input[readonly] { background-color: #f0f0f0; color: #be0000; font-weight: bold; }
-        .number-input { text-align: right; font-weight: bold; color: #0056b3; }
-        .grid-container { display: flex; gap: 20px; padding: 0 10px; }
+        input[readonly] { 
+            background-color: #f0f0f0; 
+            color: #be0000; 
+            font-weight: bold; 
+        }
+        .number-input { 
+            text-align: right; 
+            font-weight: bold; 
+            color: #0056b3; 
+        }
+        .grid-container { 
+            display: flex; 
+            gap: 20px; 
+            padding: 0 10px; 
+        }
         .grid-col { flex: 1; }
-        .col-title { font-weight: bold; color: #be0000; border-bottom: 1px solid #ccc; margin-bottom: 8px; padding-bottom: 3px; }
-        .button-group { margin-top: 15px; text-align: right; padding: 8px; background: #f0f0f0; border-top: 1px solid #ccc; }
-        .btn { padding: 5px 15px; margin-left: 5px; cursor: pointer; border: 1px solid #707070; background: #e1e1e1; font-size: 13px; }
-        .btn-save { border-color: #0078d7; font-weight: bold; }
+        .col-title { 
+            font-weight: bold; 
+            color: #be0000; 
+            border-bottom: 1px solid #ccc; 
+            margin-bottom: 8px; 
+            padding-bottom: 3px; 
+        }
+        .button-group { 
+            margin-top: 15px; 
+            text-align: right; 
+            padding: 8px; 
+            background: #f0f0f0; 
+            border-top: 1px solid #ccc; 
+        }
+        .btn { 
+            padding: 5px 15px; 
+            margin-left: 5px; 
+            cursor: pointer; 
+            border: 1px solid #707070; 
+            background: #e1e1e1; 
+            font-size: 13px; 
+        }
+        .btn-save { 
+            border-color: #0078d7; 
+            font-weight: bold; 
+        }
     </style>
 </head>
 <body>

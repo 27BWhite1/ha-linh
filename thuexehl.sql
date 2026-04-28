@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th4 17, 2026 lúc 01:55 AM
+-- Thời gian đã tạo: Th4 26, 2026 lúc 05:32 AM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -29,15 +29,20 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `chi_phi_chung` (
   `id` int(11) NOT NULL,
-  `ngay` date NOT NULL,
+  `ngay_chi` date NOT NULL,
+  `so_chung_tu` varchar(50) DEFAULT NULL,
   `thang` int(2) DEFAULT NULL,
   `nam` int(4) DEFAULT NULL,
-  `loai_chi_phi` varchar(100) DEFAULT NULL,
   `mo_ta` varchar(255) DEFAULT NULL,
-  `so_tien` decimal(15,0) DEFAULT 0,
-  `nguoi_chi` varchar(100) DEFAULT NULL,
-  `ghi_chu` text DEFAULT NULL
+  `so_tien` decimal(15,0) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `chi_phi_chung`
+--
+
+INSERT INTO `chi_phi_chung` (`id`, `ngay_chi`, `so_chung_tu`, `thang`, `nam`, `mo_ta`, `so_tien`) VALUES
+(2, '2025-08-12', 'CP2025.08-01', 8, 2025, 'Chi lương khối văn phòng', 15500000);
 
 -- --------------------------------------------------------
 
@@ -53,8 +58,16 @@ CREATE TABLE `chi_phi_xe` (
   `mo_ta` varchar(255) DEFAULT NULL,
   `so_tien` decimal(15,0) DEFAULT 0,
   `nguoi_chi` varchar(100) DEFAULT NULL,
-  `ghi_chu` text DEFAULT NULL
+  `ghi_chu` text DEFAULT NULL,
+  `so_chung_tu` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `chi_phi_xe`
+--
+
+INSERT INTO `chi_phi_xe` (`id`, `ngay`, `bien_so`, `loai_chi_phi`, `mo_ta`, `so_tien`, `nguoi_chi`, `ghi_chu`, `so_chung_tu`) VALUES
+(4, '2025-08-07', '15E-01827', 'Xăng dầu', 'Đổ 100 lít dầu', 2000000, 'Nguyễn Văn Chiến', 'Đổ 100 lít dầu', 'CP2025.08-01');
 
 -- --------------------------------------------------------
 
@@ -186,7 +199,8 @@ CREATE TABLE `danh_muc_tuyen_duong` (
 --
 
 INSERT INTO `danh_muc_tuyen_duong` (`id`, `ma_tuyen`, `ten_ca`, `ten_tuyen`, `khach_hang`, `gio_don`, `gio_ve`, `don_gia_04`, `don_gia_07`, `don_gia_16`, `don_gia_29`, `don_gia_34`, `don_gia_45`, `luong_xe_04`, `luong_xe_07`, `luong_xe_16`, `luong_xe_29`, `luong_xe_34`, `luong_xe_45`) VALUES
-(3, '1', 'Kiến An - Ca 2', 'Kiến An - Sgc', 'Sagemcom', '17:45:00', '00:00:00', 0.00, 0.00, 460000.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 100000.00, 125000.00, 0.00);
+(3, '1', 'Kiến An - Ca 2', 'Kiến An - Sgc', 'Sagemcom', '17:45:00', '00:00:00', 0.00, 0.00, 460000.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 100000.00, 125000.00, 0.00),
+(5, '2', 'Hành chính', 'Metro - Sgc', 'ALUMINIUM', '00:00:00', '00:00:00', 0.00, 0.00, 460000.00, 0.00, 0.00, 0.00, 80000.00, 90000.00, 100000.00, 125000.00, 0.00, 0.00);
 
 -- --------------------------------------------------------
 
@@ -247,9 +261,19 @@ CREATE TABLE `so_chi_tra_chu_xe` (
   `dien_giai` varchar(255) DEFAULT NULL,
   `so_tien_phai_tra` decimal(15,0) DEFAULT 0,
   `so_tien_da_tra` decimal(15,0) DEFAULT 0,
-  `ngay_tra` date DEFAULT NULL,
-  `ghi_chu` text DEFAULT NULL
+  `ngay_thu` date DEFAULT NULL,
+  `ghi_chu` text DEFAULT NULL,
+  `so_chung_tu` varchar(50) DEFAULT NULL,
+  `nguoi_nhan` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `so_chi_tra_chu_xe`
+--
+
+INSERT INTO `so_chi_tra_chu_xe` (`id`, `thang`, `nam`, `chu_xe`, `dien_giai`, `so_tien_phai_tra`, `so_tien_da_tra`, `ngay_thu`, `ghi_chu`, `so_chung_tu`, `nguoi_nhan`) VALUES
+(2, 3, 2026, 'Ngô Hữu Toàn', 'Trả tiền cược xe tháng 8', 1000000, 1000000, '2025-08-21', '', 'PC2025.07-01', 'Ngô Hữu Toàn'),
+(3, NULL, NULL, 'Ngô Hữu Toàn', 'Tạm ứng cước xe tháng 8', 500000, 0, '0000-00-00', '', 'PC2025.07-01', 'Ngô Hữu Toàn');
 
 -- --------------------------------------------------------
 
@@ -266,8 +290,16 @@ CREATE TABLE `so_thu_khach_hang` (
   `dien_giai` varchar(255) DEFAULT NULL,
   `so_tien_phai_thu` decimal(15,0) DEFAULT 0,
   `so_tien_da_thu` decimal(15,0) DEFAULT 0,
-  `ghi_chu` text DEFAULT NULL
+  `ghi_chu` text DEFAULT NULL,
+  `nguoi_tra` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `so_thu_khach_hang`
+--
+
+INSERT INTO `so_thu_khach_hang` (`id`, `ngay_thu`, `khach_hang`, `loai_xe_chay`, `ma_chung_tu`, `dien_giai`, `so_tien_phai_thu`, `so_tien_da_thu`, `ghi_chu`, `nguoi_tra`) VALUES
+(2, '2025-08-15', 'Haiya', 'Công nhân', 'PT2025.07-01', '', 200000, 200000, '', 'Vũ Thị Tuyết Dung');
 
 -- --------------------------------------------------------
 
@@ -292,7 +324,7 @@ INSERT INTO `users` (`id`, `username`, `password`, `fullname`, `role`, `created_
 (1, 'nhatquang', '2345', 'quang', 'Nhân Viên', '2026-04-03 07:53:55'),
 (2, 'Trungduc', '2345', 'Đức', 'Kế Toán', '2026-04-03 07:58:37'),
 (3, 'baominh', '4567', NULL, 'Quản lý', '2026-04-03 08:05:57'),
-(4, '123', '1234', 'BAOMINH', 'Quản lý', '2026-04-14 14:16:08');
+(5, '1', '1', NULL, 'Quản lý', '2026-04-24 10:47:52');
 
 -- --------------------------------------------------------
 
@@ -317,18 +349,20 @@ CREATE TABLE `xe_chay_cong_nhan` (
   `thue_lai` tinyint(1) DEFAULT 0,
   `ten_lai_thue` varchar(100) DEFAULT NULL,
   `tien_thue_xe` decimal(15,0) DEFAULT 0,
-  `ghi_chu` text DEFAULT NULL
+  `ghi_chu` text DEFAULT NULL,
+  `ten_thue_lai` varchar(100) DEFAULT NULL,
+  `tien_thue_lai` decimal(15,0) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `xe_chay_cong_nhan`
 --
 
-INSERT INTO `xe_chay_cong_nhan` (`id`, `ngay_chay`, `loai_hinh_xe`, `ma_tuyen`, `bien_so`, `lai_xe`, `khach_hang`, `gio_don`, `gio_ve`, `cuoc_xe`, `luong_lai_xe`, `chu_xe`, `ca_noi`, `thue_lai`, `ten_lai_thue`, `tien_thue_xe`, `ghi_chu`) VALUES
-(7, '2025-08-15', 'Xe nhà', '1', '15E-01827', 'Nguyễn Khắc Thẩm ', 'Sagemcom', '6:00:00', '00:00:00', 460000, 100000, NULL, 0, 0, NULL, 0, ''),
-(8, '2025-08-17', 'Xe nhà', '1', '15E-01827', 'Nguyễn Khắc Thẩm ', 'Sagemcom', '6:00:00', '00:00:00', 460000, 100000, NULL, 0, 0, NULL, 0, ''),
-(9, '2025-08-16', 'Xe nhà', '1', '15E-01827', 'Nguyễn Khắc Thẩm ', 'Sagemcom', '6:00:00', '00:00:00', 460000, 100000, NULL, 0, 0, NULL, 0, ''),
-(10, '2025-08-18', 'Xe nhà', '1', '15E-01827', 'Nguyễn Khắc Thẩm ', 'Sagemcom', '6:00:00', '00:00:00', 460000, 100000, NULL, 0, 0, NULL, 0, '');
+INSERT INTO `xe_chay_cong_nhan` (`id`, `ngay_chay`, `loai_hinh_xe`, `ma_tuyen`, `bien_so`, `lai_xe`, `khach_hang`, `gio_don`, `gio_ve`, `cuoc_xe`, `luong_lai_xe`, `chu_xe`, `ca_noi`, `thue_lai`, `ten_lai_thue`, `tien_thue_xe`, `ghi_chu`, `ten_thue_lai`, `tien_thue_lai`) VALUES
+(7, '2025-08-15', 'Xe nhà', '1', '15E-01827', 'Nguyễn Khắc Thẩm ', 'Sagemcom', '6:00:00', '00:00:00', 460000, 100000, NULL, 0, 0, NULL, 0, '', NULL, 0),
+(8, '2025-08-17', 'Xe nhà', '1', '15E-01827', 'Nguyễn Khắc Thẩm ', 'Sagemcom', '6:00:00', '00:00:00', 460000, 100000, NULL, 0, 0, NULL, 0, '', NULL, 0),
+(9, '2025-08-16', 'Xe nhà', '1', '15E-01827', 'Nguyễn Khắc Thẩm ', 'Sagemcom', '6:00:00', '00:00:00', 460000, 100000, NULL, 0, 0, NULL, 0, '', NULL, 0),
+(10, '2025-08-18', 'Xe nhà', '1', '15E-01827', 'Nguyễn Khắc Thẩm ', 'Sagemcom', '6:00:00', '00:00:00', 460000, 100000, NULL, 0, 0, NULL, 0, '', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -359,8 +393,20 @@ CREATE TABLE `xe_chay_du_lich` (
   `lai_xe_chi` decimal(15,0) DEFAULT 0,
   `chu_xe` varchar(100) DEFAULT NULL,
   `loai_hinh` varchar(50) DEFAULT 'Xe nhà',
-  `ghi_chu` text DEFAULT NULL
+  `ghi_chu` text DEFAULT NULL,
+  `thue_lai` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `xe_chay_du_lich`
+--
+
+INSERT INTO `xe_chay_du_lich` (`id`, `ngay_di`, `ngay_ve`, `hanh_trinh`, `khach_hang`, `bien_so`, `loai_xe`, `lai_xe`, `ten_thue_lai`, `gio_xuat_phat`, `gio_ve`, `don_gia`, `cuoc_xe`, `luong_lai_xe`, `phan_tram_luong`, `tien_thue_xe`, `tien_thue_lai`, `lai_xe_thu`, `lai_xe_nop`, `lai_xe_chi`, `chu_xe`, `loai_hinh`, `ghi_chu`, `thue_lai`) VALUES
+(3, '2025-08-02', '2025-08-28', 'HP - HN', 'Vũ Văn Tuấn', '15K-45753', 'Xe07', '', '', NULL, NULL, 0, 4000000, 0, 0, 3700000, 0, 1000000, 0, 0, 'Ngô Hữu Toàn', 'Xe thuê', '', 0),
+(4, '2025-08-15', '2025-08-15', 'HP - QN', 'Anh Vinh', '15E-01827', 'Xe16', 'Nguyễn Khắc Thẩm ', '', NULL, NULL, 0, 3000000, 510000, 17, 0, 0, 0, 0, 0, '', 'Xe nhà', '', 0),
+(5, '2025-08-12', '2025-08-15', 'HP - Nam Định', 'Anh Vinh', '15E-01827', 'Xe16', 'Nguyễn Khắc Thẩm ', '', NULL, NULL, 0, 3000000, 510000, 17, 0, 0, 0, 0, 0, '', 'Xe nhà', '', 0),
+(6, '2025-08-13', '2025-08-13', 'HP - TB', 'Anh Vinh', '15K-45753', 'Xe07', 'Bùi Văn Huynh', '', NULL, NULL, 0, 2000000, 400000, 20, 0, 0, 0, 0, 0, '', 'Xe nhà', '', 0),
+(7, '2025-08-16', '2025-08-17', 'HP - Móng Cái', 'Anh Vinh', '15K-45753', 'Xe07', 'Bùi Văn Huynh', '', NULL, NULL, 0, 4500000, 900000, 20, 0, 0, 0, 0, 0, '', 'Xe nhà', '', 0);
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -458,13 +504,13 @@ ALTER TABLE `xe_chay_du_lich`
 -- AUTO_INCREMENT cho bảng `chi_phi_chung`
 --
 ALTER TABLE `chi_phi_chung`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT cho bảng `chi_phi_xe`
 --
 ALTER TABLE `chi_phi_xe`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT cho bảng `danh_muc_hang_van_tai`
@@ -494,7 +540,7 @@ ALTER TABLE `danh_muc_loai_xe`
 -- AUTO_INCREMENT cho bảng `danh_muc_tuyen_duong`
 --
 ALTER TABLE `danh_muc_tuyen_duong`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT cho bảng `danh_muc_xe`
@@ -512,19 +558,19 @@ ALTER TABLE `luong_lai_xe`
 -- AUTO_INCREMENT cho bảng `so_chi_tra_chu_xe`
 --
 ALTER TABLE `so_chi_tra_chu_xe`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT cho bảng `so_thu_khach_hang`
 --
 ALTER TABLE `so_thu_khach_hang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT cho bảng `xe_chay_cong_nhan`
@@ -536,7 +582,7 @@ ALTER TABLE `xe_chay_cong_nhan`
 -- AUTO_INCREMENT cho bảng `xe_chay_du_lich`
 --
 ALTER TABLE `xe_chay_du_lich`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -36,7 +36,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta charset="UTF-8">
     <title>Đăng nhập - Hà Linh Transport</title>
     <style>
-        :root { --ha-linh-red: #be0000; --ha-linh-dark: #8b0000; }
+        :root { 
+            --ha-linh-red: #be0000; 
+            --ha-linh-dark: #8b0000; 
+        }
         body {
             font-family: 'Segoe UI', sans-serif;
             background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 

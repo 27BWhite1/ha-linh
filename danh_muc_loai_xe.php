@@ -20,99 +20,253 @@ while ($row = $result->fetch_assoc()) $rows[] = $row;
     <title>Danh mục Loại xe – Hà Linh</title>
     <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Be Vietnam Pro', sans-serif; background: #f1f3f8; color: #1a1f36; min-height: 100vh; }
-
-        .page-wrapper { margin: 24px 28px; padding: 0 0 40px; }
-
-        .breadcrumb { display: flex; align-items: center; gap: 6px; margin-bottom: 16px; font-size: 12px; color: #9ca3af; }
-        .breadcrumb a { color: #be0000; text-decoration: none; font-weight: 500; }
+        *, *::before, *::after { 
+            box-sizing: border-box; 
+            margin: 0; 
+            padding: 0; 
+        }
+        body { 
+            font-family: 'Be Vietnam Pro', sans-serif; 
+            background: #f1f3f8; 
+            color: #1a1f36; 
+            min-height: 100vh; 
+        }
+        .page-wrapper { 
+            margin: 24px 28px; 
+            padding: 0 0 40px; 
+        }
+        .breadcrumb { 
+            display: flex; 
+            align-items: center; 
+            gap: 6px; 
+            margin-bottom: 16px; 
+            font-size: 12px; 
+            color: #9ca3af; 
+        }
+        .breadcrumb a { 
+            color: #be0000; 
+            text-decoration: none; 
+            font-weight: 500; 
+        }
         .breadcrumb a:hover { text-decoration: underline; }
-
-        .card { background: #fff; border-radius: 16px; box-shadow: 0 4px 24px rgba(0,0,0,.07); overflow: hidden; }
-
+        .card { 
+            background: #fff; 
+            border-radius: 16px; 
+            box-shadow: 0 4px 24px rgba(0,0,0,.07); 
+            overflow: hidden; 
+        }
         .card-header {
             background: linear-gradient(135deg, #be0000 0%, #7b0000 100%);
-            padding: 24px 32px 20px; position: relative; overflow: hidden;
+            padding: 24px 32px 20px; 
+            position: relative; 
+            overflow: hidden;
         }
         .card-header::after {
-            content: ''; position: absolute; right: -40px; top: -40px;
-            width: 180px; height: 180px; border-radius: 50%;
+            content: ''; 
+            position: absolute; 
+            right: -40px; 
+            top: -40px;
+            width: 180px; 
+            height: 180px; 
+            border-radius: 50%;
             background: rgba(255,255,255,.07);
         }
-        .card-header h1 { color: #fff; font-size: 20px; font-weight: 700; position: relative; }
-        .card-header p  { color: rgba(255,255,255,.65); font-size: 12px; margin-top: 4px; position: relative; }
-
-        .toolbar { display: flex; gap: 8px; padding: 16px 24px; border-bottom: 1px solid #f0f0f5; flex-wrap: wrap; }
+        .card-header h1 { 
+            color: #fff; 
+            font-size: 20px; 
+            font-weight: 700; 
+            position: relative; 
+        }
+        .card-header p  { 
+            color: rgba(255,255,255,.65); 
+            font-size: 12px; 
+            margin-top: 4px; 
+            position: relative; 
+        }
+        .toolbar { 
+            display: flex; 
+            gap: 8px; 
+            padding: 16px 24px; 
+            border-bottom: 1px solid #f0f0f5; 
+            flex-wrap: wrap; 
+        }
         .btn {
-            display: inline-flex; align-items: center; gap: 6px;
-            padding: 8px 18px; border-radius: 8px; font-family: inherit;
-            font-size: 13px; font-weight: 600; cursor: pointer; border: none;
-            transition: all .18s; text-decoration: none;
+            display: inline-flex; 
+            align-items: center; 
+            gap: 6px;
+            padding: 8px 18px; 
+            border-radius: 8px; 
+            font-family: inherit;
+            font-size: 13px; 
+            font-weight: 600; 
+            cursor: pointer; 
+            border: none;
+            transition: all .18s; 
+            text-decoration: none;
         }
-        .btn-primary  { background: #be0000; color: #fff; }
-        .btn-primary:hover  { background: #950000; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(190,0,0,.3); }
-        .btn-secondary { background: #eef0f7; color: #3a4060; }
-        .btn-secondary:hover { background: #e0e3f0; transform: translateY(-1px); }
-        .btn-danger   { background: #fff0f0; color: #c62828; }
-        .btn-danger:hover   { background: #ffe0e0; transform: translateY(-1px); }
-        .btn-ghost    { background: transparent; color: #6b7280; border: 1px solid #e5e7eb; margin-left: auto; }
+        .btn-primary  { 
+            background: #be0000; 
+            color: #fff; 
+        }
+        .btn-primary:hover  { 
+            background: #950000; 
+            transform: translateY(-1px); 
+            box-shadow: 0 4px 12px rgba(190,0,0,.3); 
+        }
+        .btn-secondary { 
+            background: #eef0f7; 
+            color: #3a4060; 
+        }
+        .btn-secondary:hover { 
+            background: #e0e3f0; 
+            transform: translateY(-1px); 
+        }
+        .btn-danger   { 
+            background: #fff0f0; 
+            color: #c62828; 
+        }
+        .btn-danger:hover   { 
+            background: #ffe0e0; 
+            transform: translateY(-1px); 
+        }
+        .btn-ghost    { 
+            background: transparent; 
+            color: #6b7280; 
+            border: 1px solid #e5e7eb; 
+            margin-left: auto; 
+        }
         .btn-ghost:hover    { background: #f9fafb; }
-
         .table-wrap { overflow-x: auto; }
-        table { width: 100%; border-collapse: collapse; max-width: 700px; }
-        thead tr { background: #f8f9fc; border-bottom: 2px solid #eef0f7; }
-        th {
-            padding: 11px 20px; text-align: left;
-            font-size: 11px; font-weight: 700;
-            text-transform: uppercase; letter-spacing: .8px; color: #8892a4;
+        table { 
+            width: 100%; 
+            border-collapse: collapse; 
+            max-width: 700px; 
         }
-        th:first-child, th:nth-child(2) { width: 52px; text-align: center; }
-
-        tbody tr { border-bottom: 1px solid #f3f4f8; transition: background .12s; cursor: pointer; }
+        thead tr { 
+            background: #f8f9fc; 
+            border-bottom: 2px solid #eef0f7; 
+        }
+        th {
+            padding: 11px 20px; 
+            text-align: left;
+            font-size: 11px; 
+            font-weight: 700;
+            text-transform: uppercase; 
+            letter-spacing: .8px; 
+            color: #8892a4;
+        }
+        th:first-child, th:nth-child(2) { 
+            width: 52px; 
+            text-align: center; 
+        }
+        tbody tr { 
+            border-bottom: 1px solid #f3f4f8; 
+            transition: background .12s; 
+            cursor: pointer; 
+        }
         tbody tr:last-child { border-bottom: none; }
         tbody tr:hover { background: #fdf5f5; }
         tbody tr.selected { background: #fff5f5; }
-
-        td { padding: 14px 20px; font-size: 13.5px; color: #374151; }
+        td { 
+            padding: 14px 20px; 
+            font-size: 13.5px; 
+            color: #374151; 
+        }
         td:first-child, td:nth-child(2) { text-align: center; }
-        td:nth-child(2) { color: #9ca3af; font-size: 12px; }
-
-        /* Xe type cell */
-        .xe-cell { display: flex; align-items: center; gap: 10px; }
+        td:nth-child(2) { 
+            color: #9ca3af; 
+            font-size: 12px; 
+        }
+        .xe-cell { 
+            display: flex; 
+            align-items: center; 
+            gap: 10px; 
+        }
         .xe-icon {
-            width: 36px; height: 36px; border-radius: 8px;
+            width: 36px; 
+            height: 36px; 
+            border-radius: 8px;
             background: linear-gradient(135deg, #1e3a8a, #1d4ed8);
-            color: #fff; font-size: 11px; font-weight: 700;
-            display: flex; align-items: center; justify-content: center;
-            flex-direction: column; gap: 1px; flex-shrink: 0;
+            color: #fff; 
+            font-size: 11px; 
+            font-weight: 700;
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            flex-direction: column; 
+            gap: 1px; 
+            flex-shrink: 0;
         }
-        .xe-icon .xe-seats { font-size: 14px; line-height: 1; }
-        .xe-icon .xe-label { font-size: 8px; opacity: .8; }
-        .xe-name { font-weight: 700; color: #1a1f36; font-size: 14px; }
-        .xe-sub  { font-size: 11px; color: #9ca3af; margin-top: 1px; }
-
-        /* Percent badge */
-        .pct-wrap { display: flex; align-items: center; justify-content: flex-end; gap: 10px; }
+        .xe-icon .xe-seats { 
+            font-size: 14px; 
+            line-height: 1; 
+        }
+        .xe-icon .xe-label { 
+            font-size: 8px; 
+            opacity: .8; 
+        }
+        .xe-name { 
+            font-weight: 700; 
+            color: #1a1f36; 
+            font-size: 14px; 
+        }
+        .xe-sub  { 
+            font-size: 11px; 
+            color: #9ca3af; 
+            margin-top: 1px; 
+        }
+        .pct-wrap { 
+            display: flex; 
+            align-items: center; 
+            justify-content: flex-end; 
+            gap: 10px; 
+        }
         .pct-badge {
-            display: inline-flex; align-items: center; gap: 4px;
-            padding: 4px 12px; border-radius: 20px;
-            font-size: 13px; font-weight: 700;
+            display: inline-flex; 
+            align-items: center; 
+            gap: 4px;
+            padding: 4px 12px; 
+            border-radius: 20px;
+            font-size: 13px; 
+            font-weight: 700;
         }
-        .pct-high   { background: #dbeafe; color: #1e40af; }
-        .pct-medium { background: #ede9fe; color: #5b21b6; }
-        .pct-low    { background: #d1fae5; color: #065f46; }
-
-        /* Mini bar */
-        .pct-bar-wrap { width: 80px; height: 6px; background: #f3f4f6; border-radius: 3px; overflow: hidden; }
-        .pct-bar { height: 100%; border-radius: 3px; background: linear-gradient(90deg, #1e3a8a, #3b82f6); }
-
-        .empty { text-align: center; padding: 48px 20px; color: #9ca3af; }
-
+        .pct-high   { 
+            background: #dbeafe; 
+            color: #1e40af; 
+        }
+        .pct-medium { 
+            background: #ede9fe; 
+            color: #5b21b6; 
+        }
+        .pct-low    { 
+            background: #d1fae5; 
+            color: #065f46; 
+        }
+        .pct-bar-wrap { 
+            width: 80px; 
+            height: 6px; 
+            background: #f3f4f6; 
+            border-radius: 3px; 
+            overflow: hidden; 
+        }
+        .pct-bar { 
+            height: 100%; 
+            border-radius: 3px; 
+            background: linear-gradient(90deg, #1e3a8a, #3b82f6); 
+        }
+        .empty { 
+            text-align: center; 
+            padding: 48px 20px; 
+            color: #9ca3af; 
+        }
         .table-footer {
-            padding: 10px 24px; border-top: 1px solid #f3f4f8;
-            font-size: 12px; color: #9ca3af;
-            display: flex; justify-content: space-between; align-items: center;
+            padding: 10px 24px; 
+            border-top: 1px solid #f3f4f8;
+            font-size: 12px; 
+            color: #9ca3af;
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
         }
         .table-footer strong { color: #374151; }
     </style>
@@ -173,7 +327,6 @@ while ($row = $result->fetch_assoc()) $rows[] = $row;
                     foreach ($rows as $row):
                         $pct = floatval($row['phan_tram_luong_lai_xe']);
                         $ma  = htmlspecialchars($row['ma_loai_xe']);
-                        // Tách số ghế từ mã (Xe04 → 04)
                         preg_match('/\d+/', $ma, $m);
                         $seats = $m[0] ?? '';
                         $barW  = round(($pct / $maxPct) * 100);
@@ -229,13 +382,14 @@ function selectRow(row, id) {
     const rb = row.querySelector('input[type="radio"]');
     if (rb) rb.checked = true;
 }
-
 function editSelected() {
     if (selectedId) window.location.href = 'form_loai_xe.php?action=edit&id=' + selectedId;
     else alert('Vui lòng chọn một loại xe để sửa!');
 }
 function deleteSelected() {
-    if (!selectedId) { alert('Vui lòng chọn một loại xe để xóa!'); return; }
+    if (!selectedId) { alert('Vui lòng chọn một loại xe để xóa!'); 
+    return; 
+    }
     if (confirm('Bạn có chắc chắn muốn xóa loại xe này?'))
         window.location.href = 'danh_muc_loai_xe.php?delete_id=' + selectedId;
 }
@@ -243,10 +397,22 @@ function deleteSelected() {
 document.addEventListener('keydown', function(e) {
     if (!e.altKey) return;
     const k = e.key.toLowerCase();
-    if (k === 'a') { e.preventDefault(); location.href = 'form_loai_xe.php?action=add'; }
-    if (k === 'z') { e.preventDefault(); editSelected(); }
-    if (k === 'd') { e.preventDefault(); deleteSelected(); }
-    if (k === 'e') { e.preventDefault(); location.href = 'index.php'; }
+    if (k === 'a') { 
+        e.preventDefault(); 
+        location.href = 'form_loai_xe.php?action=add'; 
+    }
+    if (k === 'z') { 
+        e.preventDefault(); 
+        editSelected(); 
+    }
+    if (k === 'd') { 
+        e.preventDefault(); 
+        deleteSelected(); 
+    }
+    if (k === 'e') { 
+        e.preventDefault(); 
+        location.href = 'index.php'; 
+    }
 });
 </script>
 </body>
